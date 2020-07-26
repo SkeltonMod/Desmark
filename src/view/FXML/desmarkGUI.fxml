@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../stylesheet/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+   <left>
+      <Pane prefHeight="400.0" prefWidth="135.0" styleClass="left-pane" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="-4.0" prefHeight="47.0" prefWidth="139.0" styleClass="mainlabel" text="DESMARK" textFill="#fefcee">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            <Button fx:id="btn_overview" layoutY="63.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="135.0" styleClass="left-pane-buttons" text="OVERVIEW" textFill="#fefcee">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutY="123.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="135.0" styleClass="left-pane-buttons" text="INVENTORY" textFill="#fefcee">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutY="183.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="135.0" styleClass="left-pane-buttons" text="PAYMENT" textFill="#fefcee">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutY="243.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="135.0" styleClass="left-pane-buttons" text="REPORTS" textFill="#fefcee">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="middle-pane" BorderPane.alignment="CENTER">
+         <children>
+            <Pane fx:id="pn_inventory" prefHeight="400.0" prefWidth="466.0">
+               <children>
+                  <Button fx:id="btn_addpeople" layoutX="14.0" layoutY="37.0" mnemonicParsing="false" onAction="#add_to_inventory" prefHeight="29.0" prefWidth="57.0" styleClass="middle-pane-buttons" text="ADD" textFill="#fefcee">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <FlowPane fx:id="fpn_list" columnHalignment="CENTER" hgap="5.0" layoutX="10.0" layoutY="100.0" prefHeight="280.0" prefWidth="443.0" prefWrapLength="5.0" vgap="5.0" />
+               </children>
+            </Pane>
+            <Pane prefHeight="400.0" prefWidth="467.0" visible="false">
+               <children>
+                  <Button layoutX="338.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="108.0" styleClass="middle-pane-buttons" text="VIEW PRODUCT" textFill="#fefcee">
+                     <font>
+                        <Font name="System Bold Italic" size="9.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="126.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="108.0" styleClass="middle-pane-buttons" text="MANAGE PRODUCT" textFill="#fefcee">
+                     <font>
+                        <Font name="System Bold Italic" size="9.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="14.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="108.0" styleClass="middle-pane-buttons" text="MANAGE STOCKS" textFill="#fefcee">
+                     <font>
+                        <Font name="System Bold Italic" size="9.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
