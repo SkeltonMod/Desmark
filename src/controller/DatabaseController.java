@@ -1,12 +1,14 @@
 package controller;
 import com.mysql.cj.jdbc.*;
 import java.sql.*;
+import java.sql.Driver;
+
 public class DatabaseController {
     String db_host = "jdbc:mysql://localhost:3306/desmarkdb";
     String db_username = "root";
     String db_pasword = "";
     // Create a connection
-    public Connection DBConnection() {
+    public Connection DBConnection() throws SQLException{
         Connection conn = null;
         // load the class
         try{
@@ -14,13 +16,10 @@ public class DatabaseController {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(db_host,db_username,db_pasword);
 
-        }catch (ClassNotFoundException ex){
-            ex.printStackTrace();
-        }catch (SQLException ex){
-            ex.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
         return conn;
     }
-
 
 }

@@ -1,6 +1,7 @@
 package controller;
 
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,44 +12,27 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.Customer;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller{
+public class Controller {
     @FXML
     Pane pn_inventory;
     @FXML
     FlowPane fpn_list;
     @FXML
-    Button btn_addpeople;
-    @FXML
     Button btnHome;
     @FXML
     StackPane maincontent;
+
+
     //make a list of all the buttons
     List<Button> buttonList = new ArrayList<>();
-    @FXML
-    public void add_to_inventory(){
-        btn_addpeople.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try{
-                    Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addModal.fxml"));
-                    Stage stage = new Stage();
-                    stage.setTitle("Human Resource");
-                    stage.setScene(new Scene(root));
-                    stage.show();
+    ObservableList<Customer> oblist = FXCollections.observableArrayList();
 
-                }catch(Exception ex){
-                    System.out.println(ex.toString());
-                }
-
-            }
-        });
-
-    }
     @FXML
     public void btnHomeclick(ActionEvent event){
         FXMLLoader fxml = new FXMLLoader();
@@ -94,12 +78,7 @@ public class Controller{
             button.setText(name);
             button.getStyleClass().add("middle-pane-buttons");
             button.setTextFill(Color.rgb(254,252,238));
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    System.out.println(button.getId().toString());
-                }
-            });
+            button.setOnAction(actionEvent -> System.out.println(button.getId()));
         }
     }
 
