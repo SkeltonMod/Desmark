@@ -36,9 +36,9 @@
                               <TreeTableView fx:id="table" prefHeight="441.0" prefWidth="730.0">
                                  <columns>
                                     <TreeTableColumn fx:id="col_id" prefWidth="95.0" text="ID" />
-                                    <TreeTableColumn fx:id="col_accountNum" prefWidth="245.0" text="Account Number" />
-                                    <TreeTableColumn fx:id="col_fname" prefWidth="137.0" text="First Name" />
-                                    <TreeTableColumn fx:id="col_lname" prefWidth="265.0" text="Last Name" />
+                                    <TreeTableColumn fx:id="col_accountNum" prefWidth="300.0" text="Account Number" />
+                                    <TreeTableColumn fx:id="col_fname" prefWidth="181.0" text="First Name" />
+                                    <TreeTableColumn fx:id="col_lname" prefWidth="166.0" text="Last Name" />
                                  </columns></TreeTableView>
                               <HBox prefHeight="0.0" prefWidth="743.0" spacing="10.0">
                                  <children>

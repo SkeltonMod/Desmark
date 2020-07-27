@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class AddCustomerController implements Initializable {
     List<TreeItem<CustomerTableModel>> treeItemList = new ArrayList<>();
+    List<TreeItem<CustomerTableModel>> emails = new ArrayList<>();
     @FXML
     TreeTableView<CustomerTableModel> table;
     @FXML
@@ -59,23 +60,27 @@ public class AddCustomerController implements Initializable {
         col_fname.setCellValueFactory(new TreeItemPropertyValueFactory<>("firstname"));
         col_lname.setCellValueFactory(new TreeItemPropertyValueFactory<>("lastname"));
         //fallback!
-        TreeItem<CustomerTableModel> account1 = new TreeItem<>(new CustomerTableModel("1","39203","Elijah","Abgao"));
+        TreeItem<CustomerTableModel> account1 = new TreeItem<>
+                (new CustomerTableModel("","39203","",""));
 
         try {
             DatabaseController dbconn = new DatabaseController();
-            ResultSet res =dbconn.DBConnection().createStatement().executeQuery("SELECT id,accountName,lname,fname FROM customer");
+            ResultSet res = dbconn.DBConnection().createStatement().executeQuery("SELECT * FROM customer");
             TreeItem<CustomerTableModel> accounts = new TreeItem<>(new CustomerTableModel("CUSTOMER","","",""));
             while(res.next()){
                 treeItemList.add(new TreeItem<>(new CustomerTableModel(String.valueOf(res.getInt("id")),
                         res.getString("accountName"),res.getString("fname"),res.getString("lname"))));
+                emails.add(new TreeItem<>(new CustomerTableModel("",
+                        "",res.getString("email"),"")));
                 accounts.getChildren().clear();
-
-
             }
-            for (TreeItem<CustomerTableModel> customer: treeItemList) {
+
+            for(int i = 0; i<treeItemList.size();++i){
+                TreeItem<CustomerTableModel> customer = treeItemList.get(i);
                 accounts.getChildren().add(customer);
-                customer.getChildren().add(account1);
+                customer.getChildren().add(emails.get(i));
             }
+
             table.setRoot(accounts);
         }catch (SQLException ex){
             ex.printStackTrace();
