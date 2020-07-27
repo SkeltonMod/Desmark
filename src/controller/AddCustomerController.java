@@ -1,7 +1,5 @@
 package controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -61,20 +59,20 @@ public class AddCustomerController implements Initializable {
         col_fname.setCellValueFactory(new TreeItemPropertyValueFactory<>("firstname"));
         col_lname.setCellValueFactory(new TreeItemPropertyValueFactory<>("lastname"));
         //fallback!
-        TreeItem account1 = new TreeItem(new CustomerTableModel("1","39203","Elijah","Abgao"));
+        TreeItem<CustomerTableModel> account1 = new TreeItem<>(new CustomerTableModel("1","39203","Elijah","Abgao"));
 
         try {
             DatabaseController dbconn = new DatabaseController();
             ResultSet res =dbconn.DBConnection().createStatement().executeQuery("SELECT id,accountName,lname,fname FROM customer");
-            TreeItem accounts = new TreeItem(new CustomerTableModel("CUSTOMER","","",""));
+            TreeItem<CustomerTableModel> accounts = new TreeItem<>(new CustomerTableModel("CUSTOMER","","",""));
             while(res.next()){
-                treeItemList.add(new TreeItem(new CustomerTableModel(String.valueOf(res.getInt("id")),
+                treeItemList.add(new TreeItem<>(new CustomerTableModel(String.valueOf(res.getInt("id")),
                         res.getString("accountName"),res.getString("fname"),res.getString("lname"))));
                 accounts.getChildren().clear();
 
 
             }
-            for (TreeItem customer: treeItemList) {
+            for (TreeItem<CustomerTableModel> customer: treeItemList) {
                 accounts.getChildren().add(customer);
                 customer.getChildren().add(account1);
             }
