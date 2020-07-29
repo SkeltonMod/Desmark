@@ -30,7 +30,7 @@ public class DataController {
     }
     // parse the passed data
     public void pushCustomerData(String fname, String lname, String address, String email,
-                                 String accountnum, String occupation, String gender,String bday, String number, String civilstatus) {
+                                 String accountnum, String occupation, String gender,String bday, String number, String civilstatus,String imagelocation) {
 
         this.firstName = fname;
         this.lastName = lname;
@@ -42,6 +42,7 @@ public class DataController {
         this.number = number;
         this.birthday = bday;
         this.civilStatus = civilstatus;
+        this.imageLocation = imagelocation;
         printDetail();
     }
 
@@ -55,7 +56,7 @@ public class DataController {
                 this.gender,this.birthday,this.number,this.civilStatus);
 
         customerView.printCustomerInfo(this.firstName,this.lastName, this.address, this.number,
-                this.email,this.gender,this.birthday,this.accountName,this.occupation,this.civilStatus);
+                this.email,this.gender,this.birthday,this.accountName,this.occupation,this.civilStatus,this.imageLocation);
     }
 
     public void pushData(){

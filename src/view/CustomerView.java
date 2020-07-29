@@ -10,7 +10,7 @@ public class CustomerView {
     private DatabaseController dbconn = new DatabaseController();
     public void printCustomerInfo(String firstname, String lastname, String address,
                                   String number, String email, String gender,String bday,String accountNum,
-                                  String occupation, String civilStatus){
+                                  String occupation, String civilStatus,String imagelocation){
         System.out.println("Full Name: " + firstname + " " + lastname);
         System.out.println("Address: " + address);
         System.out.println("Number: " + number);
@@ -20,6 +20,7 @@ public class CustomerView {
         System.out.println("Account Number: " + accountNum);
         System.out.println("Occupation: " + occupation);
         System.out.println("Civil Status: " + civilStatus);
+        System.out.println("Civil Status: " + imagelocation);
 
     }
 

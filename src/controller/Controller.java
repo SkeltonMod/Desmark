@@ -59,10 +59,6 @@ public class Controller {
         maincontent.getChildren().clear();
         maincontent.getChildren().add(root);
     }
-    public void bind_data(){
-
-
-    }
     public void refresh_list(){
         System.out.println("Add");
         buttonList.add(new Button());

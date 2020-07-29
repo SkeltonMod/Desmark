@@ -7,13 +7,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.CustomerTableModel;
 
@@ -27,6 +24,7 @@ import java.util.ResourceBundle;
 public class AddCustomerController implements Initializable {
     List<TreeItem<CustomerTableModel>> treeItemList = new ArrayList<>();
     List<TreeItem<CustomerTableModel>> emails = new ArrayList<>();
+
     @FXML
     TreeTableView<CustomerTableModel> table;
     @FXML
@@ -48,6 +46,7 @@ public class AddCustomerController implements Initializable {
                     Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addModal.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Human Resource");
+
                     stage.setScene(new Scene(root));
                     stage.show();
 
@@ -94,14 +93,17 @@ public class AddCustomerController implements Initializable {
                 public void changed(ObservableValue<? extends TreeItem<CustomerTableModel>> observableValue,
                                     TreeItem<CustomerTableModel> customerTableModelTreeItem, TreeItem<CustomerTableModel> t1) {
                     try{
-                        ModalController mc = new ModalController();
-                        mc.editCustomer(t1.getValue().getId());
-                        Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addModal.fxml"));
-                        Stage stage = new Stage();
-                        stage.setTitle("Human Resource");
-                        stage.setScene(new Scene(root));
-                        stage.show();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("../view/FXML/addModal.fxml"));
+                        Parent parent = loader.load();
+                        Scene scene = new Scene(parent);
 
+                        //WTF!
+                        ModalController mc = loader.getController();
+                        mc.editCustomer(t1.getValue().getId());
+                        Stage window = new Stage();
+                        window.setScene(scene);
+                        window.show();
                     }catch(Exception ex){
                         ex.printStackTrace();
                     }

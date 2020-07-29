@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainTabPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModalController">
+<AnchorPane fx:id="mainTabPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="698.0">
          <top>
@@ -33,14 +33,14 @@
                   <TextField fx:id="txt_lname" layoutX="8.0" layoutY="72.0" prefHeight="0.0" prefWidth="327.0" promptText="Last Name" />
                   <TextArea fx:id="txt_address" layoutX="7.0" layoutY="111.0" prefHeight="112.0" prefWidth="327.0" promptText="Address" />
                   <TextField fx:id="txt_number" layoutX="348.0" layoutY="264.0" prefHeight="0.0" prefWidth="327.0" promptText="Phone Number" />
-                  <Button fx:id="btn_nso" layoutX="348.0" layoutY="326.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="327.0" text="Upload NSO" />
+                  <Button layoutX="348.0" layoutY="326.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="327.0" text="Upload NSO" />
                   <DatePicker fx:id="dp_bday" layoutX="348.0" layoutY="233.0" prefHeight="0.0" prefWidth="327.0" promptText="Birthdate" />
                   <TextField fx:id="txt_accountnum" layoutX="7.0" layoutY="8.0" prefHeight="0.0" prefWidth="327.0" promptText="Account Number" />
                   <TextField fx:id="txt_occupation" layoutX="8.0" layoutY="233.0" prefHeight="0.0" prefWidth="327.0" promptText="Occupation" />
                   <ComboBox fx:id="cbn_civilstatus" layoutX="10.0" layoutY="296.0" prefHeight="0.0" prefWidth="327.0" promptText="Civil Status" />
                   <Pane layoutX="401.0" layoutY="10.0" style="-fx-border-color: blue;">
                      <children>
-                        <ImageView fx:id="img_id" fitHeight="206.0" fitWidth="241.0" onMouseClicked="#getImage" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="img_id" fitHeight="206.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
                   <ComboBox fx:id="cbn_gender" layoutX="10.0" layoutY="326.0" prefHeight="0.0" prefWidth="327.0" promptText="Gender" visibleRowCount="2" />
@@ -51,7 +51,7 @@
          <bottom>
             <Pane prefHeight="78.0" prefWidth="698.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btn_save" layoutX="8.0" layoutY="21.0" mnemonicParsing="false" onAction="#pushData_customers" prefHeight="46.0" prefWidth="130.0" text="Save Changes" />
+                  <Button layoutX="8.0" layoutY="21.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="130.0" text="Save Changes" />
                   <Button layoutX="158.0" layoutY="20.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="130.0" text="Cancel" />
                </children>
             </Pane>
