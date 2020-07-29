@@ -3,15 +3,11 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import model.Customer;
 
 import java.io.IOException;
@@ -19,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
+    @FXML
+    BorderPane borderPane;
     @FXML
     Pane pn_inventory;
     @FXML
@@ -57,6 +55,7 @@ public class Controller {
         }
 
         AnchorPane root = fxml.getRoot();
+
         maincontent.getChildren().clear();
         maincontent.getChildren().add(root);
     }

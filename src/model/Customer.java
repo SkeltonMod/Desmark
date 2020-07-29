@@ -1,7 +1,6 @@
 package model;
 
 public class Customer {
-    private String id;
     private String firstname;
     private String lastname;
     private String imageLocation;
@@ -14,12 +13,6 @@ public class Customer {
     private String bday;
     private String number;
 
-    public void modelTable(String id, String firstname, String lastname, String accountName){
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.accountName = accountName;
-    }
 
     public void CustomerData(String firstname, String lastname,
                              String address, String email,

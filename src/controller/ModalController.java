@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 public class ModalController implements Initializable {
     @FXML
     AnchorPane mainTabPane;
@@ -43,7 +42,9 @@ public class ModalController implements Initializable {
     @FXML
     ComboBox cbn_gender2;
 
+
     private String imageLocation;
+    private String imageName;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -108,7 +109,11 @@ public class ModalController implements Initializable {
             ex.printStackTrace();
         }
     }
+    public void editCustomer(String id){
+        System.out.println("The ID is: "+ id);
 
+
+    }
 }
 
 

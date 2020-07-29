@@ -1,7 +1,6 @@
 package controller;
 import com.mysql.cj.jdbc.*;
 import java.sql.*;
-import java.sql.Driver;
 
 public class DatabaseController {
     String db_host = "jdbc:mysql://localhost:3306/desmarkdb";

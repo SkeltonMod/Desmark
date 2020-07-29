@@ -4,7 +4,6 @@ package controller;
 import model.Customer;
 import view.CustomerView;
 
-import java.sql.SQLException;
 // handles the logic and functions for models
 public class DataController {
     private Customer customerModel;

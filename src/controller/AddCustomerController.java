@@ -1,14 +1,19 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.CustomerTableModel;
 
@@ -75,18 +80,42 @@ public class AddCustomerController implements Initializable {
                 accounts.getChildren().clear();
             }
 
+
+
             for(int i = 0; i<treeItemList.size();++i){
+
                 TreeItem<CustomerTableModel> customer = treeItemList.get(i);
                 accounts.getChildren().add(customer);
                 customer.getChildren().add(emails.get(i));
-            }
 
+            }
+            table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<CustomerTableModel>>() {
+                @Override
+                public void changed(ObservableValue<? extends TreeItem<CustomerTableModel>> observableValue,
+                                    TreeItem<CustomerTableModel> customerTableModelTreeItem, TreeItem<CustomerTableModel> t1) {
+                    try{
+                        ModalController mc = new ModalController();
+                        mc.editCustomer(t1.getValue().getId());
+                        Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addModal.fxml"));
+                        Stage stage = new Stage();
+                        stage.setTitle("Human Resource");
+                        stage.setScene(new Scene(root));
+                        stage.show();
+
+                    }catch(Exception ex){
+                        ex.printStackTrace();
+                    }
+                }
+            });
             table.setRoot(accounts);
         }catch (SQLException ex){
             ex.printStackTrace();
         }
 
     }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getTableData();
