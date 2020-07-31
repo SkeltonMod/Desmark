@@ -70,6 +70,5 @@ public class DataController {
         CustomerController(customer,customerview);
         upadateView();
         pushData();
-
     }
 }

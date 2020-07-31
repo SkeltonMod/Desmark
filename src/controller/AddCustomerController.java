@@ -78,9 +78,6 @@ public class AddCustomerController implements Initializable {
                         "",res.getString("email"),"")));
                 accounts.getChildren().clear();
             }
-
-
-
             for(int i = 0; i<treeItemList.size();++i){
 
                 TreeItem<CustomerTableModel> customer = treeItemList.get(i);
@@ -92,20 +89,22 @@ public class AddCustomerController implements Initializable {
                 @Override
                 public void changed(ObservableValue<? extends TreeItem<CustomerTableModel>> observableValue,
                                     TreeItem<CustomerTableModel> customerTableModelTreeItem, TreeItem<CustomerTableModel> t1) {
-                    try{
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("../view/FXML/addModal.fxml"));
-                        Parent parent = loader.load();
-                        Scene scene = new Scene(parent);
-
-                        //WTF!
-                        ModalController mc = loader.getController();
-                        mc.editCustomer(t1.getValue().getId());
-                        Stage window = new Stage();
-                        window.setScene(scene);
-                        window.show();
-                    }catch(Exception ex){
-                        ex.printStackTrace();
+                    //prevent the user from clicking the parent entry
+                    if(!t1.getValue().getId().equals("CUSTOMER")){
+                        try {
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("../view/FXML/addModal.fxml"));
+                            Parent parent = loader.load();
+                            Scene scene = new Scene(parent);
+                            //WTF!
+                            ModalController mc = loader.getController();
+                            mc.editCustomer(t1.getValue().getId());
+                            Stage window = new Stage();
+                            window.setScene(scene);
+                            window.show();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
             });
@@ -115,8 +114,6 @@ public class AddCustomerController implements Initializable {
         }
 
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
