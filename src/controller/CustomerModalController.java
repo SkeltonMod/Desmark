@@ -25,7 +25,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-public class ModalController implements Initializable {
+public class CustomerModalController implements Initializable {
     @FXML
     Button btn_nso;
     @FXML

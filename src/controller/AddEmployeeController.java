@@ -9,10 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
-import model.CustomerTableModel;
+import model.EmployeeTableModel;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -21,20 +24,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddCustomerController implements Initializable {
-    List<TreeItem<CustomerTableModel>> treeItemList = new ArrayList<>();
-    List<TreeItem<CustomerTableModel>> emails = new ArrayList<>();
+public class AddEmployeeController implements Initializable {
+    List<TreeItem<EmployeeTableModel>> treeItemList = new ArrayList<>();
+    List<TreeItem<EmployeeTableModel>> emails = new ArrayList<>();
 
     @FXML
-    TreeTableView<CustomerTableModel> table;
+    TreeTableView<EmployeeTableModel> table;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_id;
+    TreeTableColumn<EmployeeTableModel,String> col_id;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_accountNum;
+    TreeTableColumn<EmployeeTableModel,String> col_employeeID;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_fname;
+    TreeTableColumn<EmployeeTableModel,String> col_fname;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_lname;
+    TreeTableColumn<EmployeeTableModel,String> col_lname;
     @FXML
     Button btn_addpeople;
     @FXML
@@ -43,7 +46,7 @@ public class AddCustomerController implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try{
-                    Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addCustomerModal.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addEmployeeModal.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Human Resource");
 
@@ -60,40 +63,42 @@ public class AddCustomerController implements Initializable {
     }
     public void getTableData(){
         col_id.setCellValueFactory(new TreeItemPropertyValueFactory<>("id"));
-        col_accountNum.setCellValueFactory(new TreeItemPropertyValueFactory<>("accountName"));
+        col_employeeID.setCellValueFactory(new TreeItemPropertyValueFactory<>("employeeID"));
         col_fname.setCellValueFactory(new TreeItemPropertyValueFactory<>("firstname"));
         col_lname.setCellValueFactory(new TreeItemPropertyValueFactory<>("lastname"));
         try {
             DatabaseController dbconn = new DatabaseController();
-            ResultSet res = dbconn.DBConnection().createStatement().executeQuery("SELECT * FROM customer");
-            TreeItem<CustomerTableModel> accounts = new TreeItem<>(new CustomerTableModel("CUSTOMER","","",""));
+            ResultSet res = dbconn.DBConnection().createStatement().executeQuery("SELECT * FROM employee");
+            TreeItem<EmployeeTableModel> accounts = new TreeItem<>(new EmployeeTableModel("EMPLOYEE","","",""));
             while(res.next()){
-                treeItemList.add(new TreeItem<>(new CustomerTableModel(String.valueOf(res.getInt("id")),
-                        res.getString("accountName"),res.getString("fname"),res.getString("lname"))));
-                emails.add(new TreeItem<>(new CustomerTableModel("",
+                treeItemList.add(new TreeItem<>(new EmployeeTableModel(
+                        String.valueOf(res.getInt("id")),res.getString("fname"),res.getString("lname"),
+                        res.getString("employeeID")
+                )));
+                emails.add(new TreeItem<>(new EmployeeTableModel("",
                         "",res.getString("email"),"")));
                 accounts.getChildren().clear();
             }
             for(int i = 0; i<treeItemList.size();++i){
 
-                TreeItem<CustomerTableModel> customer = treeItemList.get(i);
-                accounts.getChildren().add(customer);
-                customer.getChildren().add(emails.get(i));
+                TreeItem<EmployeeTableModel> employee = treeItemList.get(i);
+                accounts.getChildren().add(employee);
+                employee.getChildren().add(emails.get(i));
 
             }
-            table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<CustomerTableModel>>() {
+            table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
                 @Override
-                public void changed(ObservableValue<? extends TreeItem<CustomerTableModel>> observableValue,
-                                    TreeItem<CustomerTableModel> customerTableModelTreeItem, TreeItem<CustomerTableModel> t1) {
+                public void changed(ObservableValue<? extends TreeItem<EmployeeTableModel>> observableValue,
+                                    TreeItem<EmployeeTableModel> employeeTableModelTreeItem, TreeItem<EmployeeTableModel> t1) {
                     //prevent the user from clicking the parent entry
-                    if(!t1.getValue().getId().equals("CUSTOMER")){
+                    if (!t1.getValue().getId().equals("EMPLOYEE")) {
                         try {
                             FXMLLoader loader = new FXMLLoader();
-                            loader.setLocation(getClass().getResource("../view/FXML/addCustomerModal.fxml"));
+                            loader.setLocation(getClass().getResource("../view/FXML/addEmployeeModal.fxml"));
                             Parent parent = loader.load();
                             Scene scene = new Scene(parent);
                             //WTF!
-                            CustomerModalController mc = loader.getController();
+                            EmployeeModalController mc = loader.getController();
                             mc.editCustomer(t1.getValue().getId());
                             Stage window = new Stage();
                             window.setScene(scene);

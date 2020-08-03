@@ -1,31 +1,31 @@
 package model;
 
-public class Customer {
+public class Employee {
     private String firstname;
     private String lastname;
-    private String imageLocation;
-    private String nsoLocation;
     private String address;
     private String email;
-    private String accountName;
-    private String occupation;
+    private String employeeID;
+    private String job_title;
+    private String civilStatus;
     private String gender;
     private String bday;
     private String number;
-    private String civilStatus;
+    private String imageLocation;
+    private String nsoLocation;
 
 
-    public void CustomerData(String firstname, String lastname,
+    public void EmployeeData(String firstname, String lastname,
                              String address, String email,
-                             String accountName, String occupation,
+                             String employeeID, String job_title,
                              String gender, String bday ,String number,
                              String civilStatus) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.email = email;
-        this.accountName = accountName;
-        this.occupation = occupation;
+        this.employeeID = employeeID;
+        this.job_title = job_title;
         this.gender = gender;
         this.number = number;
         this.bday = bday;
@@ -54,11 +54,11 @@ public class Customer {
     }
 
     public String getAccountName() {
-        return accountName;
+        return employeeID;
     }
 
     public String getOccupation() {
-        return occupation;
+        return job_title;
     }
 
     public String getGender() {
@@ -69,13 +69,9 @@ public class Customer {
         return number;
     }
 
-
     public String getCivilStatus() {
         return civilStatus;
     }
-
-
-
 
     public String getFullName(){
         return firstname +" "+ lastname;
