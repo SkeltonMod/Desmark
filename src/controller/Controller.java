@@ -73,6 +73,19 @@ public class Controller {
         maincontent.getChildren().clear();
         maincontent.getChildren().add(root);
     }
+    @FXML
+    public void btnStoreClick(ActionEvent event){
+        FXMLLoader fxml = new FXMLLoader();
+        try{
+            fxml.load(getClass().getResource("/view/FXML/addProduct.fxml").openStream());
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+        AnchorPane root = fxml.getRoot();
+        maincontent.getChildren().clear();
+        maincontent.getChildren().add(root);
+    }
+
     public void refresh_list(){
         System.out.println("Add");
         buttonList.add(new Button());

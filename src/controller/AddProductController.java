@@ -15,8 +15,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
-import model.CustomerTableModel;
-
+import model.ProductTableModel;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,19 +24,17 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddProductController implements Initializable {
-    List<TreeItem<CustomerTableModel>> treeItemList = new ArrayList<>();
-    List<TreeItem<CustomerTableModel>> emails = new ArrayList<>();
-
+    List<TreeItem<ProductTableModel>> treeItemList = new ArrayList<>();
     @FXML
-    TreeTableView<CustomerTableModel> table;
+    TreeTableView<ProductTableModel> table;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_id;
+    TreeTableColumn<ProductTableModel,String> col_id;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_pname;
+    TreeTableColumn<ProductTableModel,String> col_pname;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_pcode;
+    TreeTableColumn<ProductTableModel,String> col_pcode;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_stock;
+    TreeTableColumn<ProductTableModel,String> col_stock;
     @FXML
     Button btn_addpeople;
     @FXML
@@ -48,7 +45,7 @@ public class AddProductController implements Initializable {
                 try{
                     Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addProductModal.fxml"));
                     Stage stage = new Stage();
-                    stage.setTitle("Human Resource");
+                    stage.setTitle("Inventory");
 
                     stage.setScene(new Scene(root));
                     stage.show();
@@ -63,41 +60,39 @@ public class AddProductController implements Initializable {
     }
     public void getTableData(){
         col_id.setCellValueFactory(new TreeItemPropertyValueFactory<>("id"));
-        col_pname.setCellValueFactory(new TreeItemPropertyValueFactory<>("accountName"));
-        col_pcode.setCellValueFactory(new TreeItemPropertyValueFactory<>("firstname"));
-        col_stock.setCellValueFactory(new TreeItemPropertyValueFactory<>("lastname"));
+        col_pname.setCellValueFactory(new TreeItemPropertyValueFactory<>("productName"));
+        col_pcode.setCellValueFactory(new TreeItemPropertyValueFactory<>("productCode"));
+        col_stock.setCellValueFactory(new TreeItemPropertyValueFactory<>("stocks"));
         try {
             DatabaseController dbconn = new DatabaseController();
-            ResultSet res = dbconn.DBConnection().createStatement().executeQuery("SELECT * FROM customer");
-            TreeItem<CustomerTableModel> accounts = new TreeItem<>(new CustomerTableModel("CUSTOMER","","",""));
+            ResultSet res = dbconn.DBConnection().createStatement().executeQuery("SELECT * FROM product");
+            TreeItem<ProductTableModel> products = new TreeItem<>(new ProductTableModel("","","",0));
             while(res.next()){
-                treeItemList.add(new TreeItem<>(new CustomerTableModel(String.valueOf(res.getInt("id")),
-                        res.getString("accountName"),res.getString("fname"),res.getString("lname"))));
-                emails.add(new TreeItem<>(new CustomerTableModel("",
-                        "",res.getString("email"),"")));
-                accounts.getChildren().clear();
-            }
-            for(int i = 0; i<treeItemList.size();++i){
+                treeItemList.add(new TreeItem<>(new ProductTableModel(String.valueOf(res.getInt("id")),
+                        res.getString("pname"),res.getString("pcode"),res.getInt("quantity"))));
 
-                TreeItem<CustomerTableModel> customer = treeItemList.get(i);
-                accounts.getChildren().add(customer);
-                customer.getChildren().add(emails.get(i));
+                //products.getChildren().clear();
 
             }
-            table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<CustomerTableModel>>() {
+            for(int i = 0; i < treeItemList.size(); ++i){
+                products.getChildren().add(treeItemList.get(i));
+
+            }
+
+            table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<ProductTableModel>>() {
                 @Override
-                public void changed(ObservableValue<? extends TreeItem<CustomerTableModel>> observableValue,
-                                    TreeItem<CustomerTableModel> customerTableModelTreeItem, TreeItem<CustomerTableModel> t1) {
+                public void changed(ObservableValue<? extends TreeItem<ProductTableModel>> observableValue,
+                                    TreeItem<ProductTableModel> productTableModelTreeItem, TreeItem<ProductTableModel> t1) {
                     //prevent the user from clicking the parent entry
-                    if(!t1.getValue().getId().equals("CUSTOMER")){
+                    if(!t1.getValue().getProductName().equals("")){
                         try {
                             FXMLLoader loader = new FXMLLoader();
-                            loader.setLocation(getClass().getResource("../view/FXML/addCustomerModal.fxml"));
+                            loader.setLocation(getClass().getResource("../view/FXML/addProductModal.fxml"));
                             Parent parent = loader.load();
                             Scene scene = new Scene(parent);
                             //WTF!
-                            CustomerModalController mc = loader.getController();
-                            mc.editCustomer(t1.getValue().getId());
+                            ProductModalController mc = loader.getController();
+                            mc.editProduct(t1.getValue().getId());
                             Stage window = new Stage();
                             window.setScene(scene);
                             window.show();
@@ -107,7 +102,7 @@ public class AddProductController implements Initializable {
                     }
                 }
             });
-            table.setRoot(accounts);
+            table.setRoot(products);
         }catch (SQLException ex){
             ex.printStackTrace();
         }

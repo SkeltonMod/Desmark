@@ -46,7 +46,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btnStore" contentDisplay="TOP" layoutX="10.0" layoutY="133.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="127.0" text="Inventory">
+                                    <Button fx:id="btnStore" contentDisplay="TOP" layoutX="10.0" layoutY="133.0" mnemonicParsing="false" onAction="#btnStoreClick" prefHeight="78.0" prefWidth="127.0" text="Inventory">
                                        <graphic>
                                           <ImageView fx:id="imgStoreBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
