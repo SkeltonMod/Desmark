@@ -33,11 +33,11 @@ public class AddProductController implements Initializable {
     @FXML
     TreeTableColumn<CustomerTableModel,String> col_id;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_accountNum;
+    TreeTableColumn<CustomerTableModel,String> col_pname;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_fname;
+    TreeTableColumn<CustomerTableModel,String> col_pcode;
     @FXML
-    TreeTableColumn<CustomerTableModel,String> col_lname;
+    TreeTableColumn<CustomerTableModel,String> col_stock;
     @FXML
     Button btn_addpeople;
     @FXML
@@ -46,7 +46,7 @@ public class AddProductController implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try{
-                    Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addCustomerModal.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("../view/FXML/addProductModal.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Human Resource");
 
@@ -63,9 +63,9 @@ public class AddProductController implements Initializable {
     }
     public void getTableData(){
         col_id.setCellValueFactory(new TreeItemPropertyValueFactory<>("id"));
-        col_accountNum.setCellValueFactory(new TreeItemPropertyValueFactory<>("accountName"));
-        col_fname.setCellValueFactory(new TreeItemPropertyValueFactory<>("firstname"));
-        col_lname.setCellValueFactory(new TreeItemPropertyValueFactory<>("lastname"));
+        col_pname.setCellValueFactory(new TreeItemPropertyValueFactory<>("accountName"));
+        col_pcode.setCellValueFactory(new TreeItemPropertyValueFactory<>("firstname"));
+        col_stock.setCellValueFactory(new TreeItemPropertyValueFactory<>("lastname"));
         try {
             DatabaseController dbconn = new DatabaseController();
             ResultSet res = dbconn.DBConnection().createStatement().executeQuery("SELECT * FROM customer");
