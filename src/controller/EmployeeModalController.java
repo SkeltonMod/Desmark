@@ -76,7 +76,6 @@ public class EmployeeModalController implements Initializable {
         dt_controller.getImagePath(imageLocation);
         dt_controller.pushEmployeeData(firstname,lastname,address,email,accountnum,
                 occupation,gender,birthday,number,civilstatus,imageLocation);
-
     }
     public void getImage(){
         if(!txt_fname.getText().equals("")){
